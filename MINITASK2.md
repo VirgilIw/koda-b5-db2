@@ -3,32 +3,29 @@
 ```mermaid
 erDiagram
 
-USER {
+USERS {
     int id PK
     string name
+    string email
 }
 
-WALLET{
+WALLETS {
     int id PK
-    string wallet_name
+    int user_id FK
+    int balance
 }
 
-BALANCE{
+TRANSACTIONS {
     int id PK
-    int total_balance
     int wallet_id FK
+    int amount
+    string type
+    datetime created_at
 }
 
-PAYMENT {
-    int id PK
-    string type_payment
-    int total_price
-    int balance_id fk
-}
+USERS ||--|{ WALLETS : typeWallet
+WALLETS ||--o{ TRANSACTIONS : payment
 
-USER }|--o{WALLET : choose
-WALLET||--||BALANCE : checked
-BALANCE ||--o|PAYMENT : transaction
 
 ```
 <!--  -->
